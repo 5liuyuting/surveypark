@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<!-- <constant name="struts.enable.DynamicMethodInvocation" value="false" 
+		/> -->
+	<!-- 配置为开发模式 -->
+	<constant name="struts.devMode" value="false" />
+	<!-- 把扩展名配置为action -->
+	<constant name="struts.action.extension" value="action" />
+	<!-- 把主题配置为action -->
+	<constant name="struts.ui.theme" value="simple" />
+
+	<package name="default" namespace="/" extends="struts-default">
+		<result-types>
+			<result-type name="chart"
+				class="org.apache.struts2.dispatcher.ChartResult"></result-type>
+		</result-types>
+
+		<!-- 配置拦截器 -->
+    <interceptors>
+    	<!-- 声明拦截器 -->
+    	<interceptor name="CheckPrivilege" class="com.surveypark.util.CheckPrivilegeInterceptor"></interceptor>
+   		<!-- 重新定义默认的拦截器栈 -->
+   		<interceptor-stack name="defaultStack">
+   			<interceptor-ref name="CheckPrivilege"></interceptor-ref>
+   			<interceptor-ref name="defaultStack"></interceptor-ref>
+   		</interceptor-stack>
+    </interceptors>
+    <global-results>
+    	<result name="loginUI" type="redirectAction">user_loginUI</result>
+    </global-results>
+    
+		<!-- struts2与spring整合后，class属性可以写bean的名称 -->
+		<!-- 调查问卷 -->
+		<action name="survey_*" class="surveyAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/list.jsp</result>
+			<result name="save" type="redirectAction">
+				<param name="surveyId">${id}</param>
+				<param name="surveyTitle">${title}</param>
+				<param name="actionName">question_createUI</param>
+			</result>
+			<result name="toList" type="redirectAction">survey_list</result>
+		</action>
+
+		<!-- 问题 -->
+		<action name="question_*" class="questionAction" method="{1}">
+			<result name="createUI">/WEB-INF/jsp/createUI.jsp</result>
+			<result name="preview">/WEB-INF/jsp/preview.jsp</result>
+			<result name="release" type="redirectAction">survey_list</result>
+		</action>
+
+		<!-- 选项 -->
+		<action name="option_*" class="optionAction" method="{1}">
+			<!-- <result></result> -->
+		</action>
+
+		<!--答案 -->
+		<action name="answer_*" class="answerAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/survey.jsp</result>
+			<result name="result">/WEB-INF/jsp/thanks.jsp</result>
+			<result name="report">/WEB-INF/jsp/report.jsp</result>
+			<result name="jfreeChart" type="chart">
+				<param name="width">500</param>
+				<param name="height">500</param>
+			</result>
+			<result name="noDataPage">/WEB-INF/jsp/noDataPage.jsp</result>
+		</action>
+
+		<!-- 用户 -->
+		<action name="user_*" class="userAction" method="{1}">
+			<result name="loginUI">/WEB-INF/jsp/loginUI.jsp</result>
+			<result name="registerUI">/WEB-INF/jsp/registerUI.jsp</result>
+			<result name="toLoginUI" type="redirectAction">user_loginUI</result>
+			<result name="toList" type="redirectAction">survey_list</result>
+		</action>
+	</package>
+</struts>

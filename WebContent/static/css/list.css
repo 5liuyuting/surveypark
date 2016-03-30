@@ -1,0 +1,81 @@
+html, body {
+    color: #505050;
+    font-family: "Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","Hiragino Sans GB W3","WenQuanYi Micro Hei","Microsoft YaHei UI","Microsoft YaHei",sans-serif;
+    line-height: 1.75em;
+	background:#e2e2e2;
+}
+header{
+	height:60px;;
+	margin-bottom:20px;
+   	border: 1px solid #eff0f0;  	
+}
+#list_head{
+	width:70%;
+	height:60px;
+	background: none repeat scroll 0 0 #484848;
+	float:left;
+}
+#user{
+	width:30%;
+	height:60px;
+	background: none repeat scroll 0 0 #484848;
+	float:right;
+	text-align:right;
+}
+#centerDiv{
+	background: none repeat scroll 0 0 #fafbfb;
+	height:60%;
+}
+ul li{
+	list-style-type:none;
+	margin:0px;
+	position:0px;
+}
+h1, h2, h3, h4, h5, h6 {
+    color: inherit;
+    font-family: inherit;
+    font-weight: normal;
+    text-rendering: optimizelegibility;
+}
+
+element.style {
+    display: block;
+}
+.new_create {
+    background: none repeat scroll 0 0 #53a4f4;
+    border-radius: 4px;
+    color: #fff;
+    display: none;
+    float: left;
+    font-size: 14px;
+    height: 28px;
+    line-height: 28px;
+    margin-top: 1px;
+    text-align: center;
+    width: 110px;
+}
+
+.pop-box {
+    z-index: 9999; /*这个数值要足够大，才能够显示在最上层*/
+    margin-bottom: 3px;
+    display: none;
+    position: absolute;
+    background:#fafbfb;
+    border:solid 1px #fafbfb;
+}
+
+.pop-box h5 {
+	color:#000000;
+    cursor:default;
+    height: 18px;
+    font-size: 20px;
+    font-weight:bold;
+    text-align: center;   
+}
+
+.pop-box-body {
+    clear: both;
+    margin: 4px;
+    padding: 2px;
+}
+
